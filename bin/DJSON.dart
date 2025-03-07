@@ -35,7 +35,7 @@ class CreateJSON extends JSONobject {
   void DJSONprotected(CreateJSON file) {
 
 
-
+//the protected method is no longer developed, use encryptOrDecryptFile instead
 
   
   }
