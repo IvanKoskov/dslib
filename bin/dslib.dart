@@ -22,17 +22,13 @@ void main(List<String> arguments) async {
 
   var file = CreateJSON('testdata.json', '/Users/evan/testjson');  // Use your appropriate path here
 
+var archive = Djsonarchive();
 
-    var initialContent = {
-    'name': 'John Doe',
-    'age': 30,
-    'email': 'johndoe@example.com',
-    'isActive': true,
-    'tags': ['developer', 'dart']
-  };
+archive.DJSONunarchive(file);
+  
 
-  var formattedjson = file.JSONformat(initialContent);
-  print(formattedjson);
+ // var formattedjson = file.JSONformat(initialContent);
+ // print(formattedjson);
 
  // var arhcive = Djsonarchive();
 
