@@ -1,6 +1,6 @@
 name: dslib
 description: dslib (DSJSON) json format manipulation cross-platform library 
-version: 1.0.1
+version: 1.0.2
 repository: https://github.com/ivankoskov/dslib
 
 environment:
