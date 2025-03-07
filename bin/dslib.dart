@@ -26,7 +26,7 @@ void main(List<String> arguments) async {
 
   arhcive.DJSONarchive(file);
   
-//bool ok = arhcive.DJSONarchive(file)
+
 /*
 // var file = CreateJSON('testdata.json', '/Users/evan/testjson', true); //if it will be encrypted
 
@@ -57,11 +57,10 @@ void main(List<String> arguments) async {
     print(decodedContent);
   }
 
-  // Step 5: Delete the JSON file
-  file.deleteJSONFile(file);
+  */
 
 
-*/
+
 
 
 
