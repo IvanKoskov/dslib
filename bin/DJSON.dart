@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import "JSONOBJECT.dart";
 import 'package:archive/archive.dart';
-
+import 'package:encrypt/encrypt.dart' as encrypt; //for protected function
+import 'package:crypto/crypto.dart'; 
+import 'dart:typed_data'; 
 
 
 /*
@@ -29,10 +31,67 @@ class CreateJSON extends JSONobject {
     print('File: $name, Path: $path, isProtected: $isProtected');
   }
 
-
+/*
   void DJSONprotected(CreateJSON file) {
+
+
+
+
   
   }
+
+*/
+
+
+void encryptOrDecryptFile(
+    String password,
+    String inputFilePath,
+    String outputFilePath,
+    bool isEncrypting, // true for encryption, false for decryption
+) async {
+  // Generate a key from the password (using SHA256 for example)
+  final key = _generateKey(password);
+
+  // Generate a random IV (Initialization Vector)
+  final iv = encrypt.IV.fromLength(16); // AES block size is 16 bytes
+
+  // Create an AES encryption object with the key and IV
+  final encrypter = encrypt.Encrypter(encrypt.AES(key));
+
+  // Read the file content
+  final file = File(inputFilePath);
+  final fileBytes = await file.readAsBytes();
+
+  late List<int> resultBytes;
+  if (isEncrypting) {
+    // Encrypt the file content with the IV
+    final encrypted = encrypter.encryptBytes(fileBytes, iv: iv);
+    resultBytes = iv.bytes + encrypted.bytes; // Append IV to the encrypted data
+  } else {
+    // Decrypt the file content
+    final encryptedBytes = Uint8List.fromList(fileBytes);
+    final ivFromFile = encrypt.IV(encryptedBytes.sublist(0, 16)); // Extract IV from the first 16 bytes
+    final encryptedData = encryptedBytes.sublist(16); // The remaining bytes are the encrypted data
+
+    final decrypted = encrypter.decryptBytes(encrypt.Encrypted(encryptedData), iv: ivFromFile);
+    resultBytes = decrypted;
+  }
+
+  // Write the processed content (encrypted/decrypted) to a new file
+  final outputFile = File(outputFilePath);
+  await outputFile.writeAsBytes(resultBytes);
+
+  print(isEncrypting
+      ? 'File encrypted and saved to $outputFilePath'
+      : 'File decrypted and saved to $outputFilePath');
+}
+
+// Generate a key from a password
+encrypt.Key _generateKey(String password) {
+  final key = utf8.encode(password); // Convert password to bytes
+  final digest = sha256.convert(key); // Hash the password using SHA-256
+  return encrypt.Key(Uint8List.fromList(digest.bytes)); // Convert List<int> to Uint8List
+}
 
 
 

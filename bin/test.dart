@@ -42,7 +42,9 @@
 *      late var file = CreateJSON('testdata.json', '/Users/evan/testjson');                                           *
 *      var file = CreateJSON('testdata.json', '/Users/evan/testjson', true); // if it will be encrypted                *
 *                                                                                                                     *
-*    Note: Encryption is not yet finished, so please wait for it in future releases.                                   *
+*    // Example usage of protecting jsons
+ * //file.encryptOrDecryptFile('1234', '/Users/evan/testjson/testdata.json', '/Users/evan/testjson/testdataa2.json', true); // Encrypt*
+ * //file.encryptOrDecryptFile('1234', '/Users/evan/testjson/testdataa2.json', '/Users/evan/testjson/testdata33.json', false); // Decrypt  *
 *                                                                                                                     *
 * 4. Now, let's use one of the methods on the file:                                                                    *
 *                                                                                                                     *

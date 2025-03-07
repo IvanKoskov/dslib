@@ -22,9 +22,13 @@ void main(List<String> arguments) async {
 
   var file = CreateJSON('testdata.json', '/Users/evan/testjson');  // Use your appropriate path here
 
-  var arhcive = Djsonarchive();
+ // var arhcive = Djsonarchive();
 
-  arhcive.DJSONarchive(file);
+  //arhcive.DJSONarchive(file);
+
+    // Example usage
+  //file.encryptOrDecryptFile('1234', '/Users/evan/testjson/testdata.json', '/Users/evan/testjson/testdataa2.json', true); // Encrypt
+  //file.encryptOrDecryptFile('1234', '/Users/evan/testjson/testdataa2.json', '/Users/evan/testjson/testdata33.json', false); // Decrypt
   
 
 /*
