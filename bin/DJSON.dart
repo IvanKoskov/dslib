@@ -96,6 +96,28 @@ encrypt.Key _generateKey(String password) {
 
 
 
+dynamic JSONformat(var body) {
+  // Check if body is a String (i.e., raw JSON string)
+  if (body is String) {
+    try {
+      var decodedJson = jsonDecode(body);  // Decode JSON string to Map
+      var encoder = JsonEncoder.withIndent('  ');  // Create an encoder with indentation
+      return encoder.convert(decodedJson);  // Convert the Map back to pretty-printed JSON string
+    } catch (e) {
+      return 'Invalid JSON format: $e';  // Handle error if the string is not valid JSON
+    }
+  } 
+  // Check if body is already a Map (no need to decode, just convert it to JSON string)
+  else if (body is Map) {
+    var encoder = JsonEncoder.withIndent('  ');
+    return encoder.convert(body);  // Directly format the Map as a JSON string
+  } else {
+    return 'Expected a JSON string or Map';  // If body is neither a String nor Map
+  }
+}
+
+
+
   // Method to populate a JSON file with dynamic content
 int populateJSONfile(var body, CreateJSON file) {
   try {

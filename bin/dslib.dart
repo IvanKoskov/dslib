@@ -22,6 +22,18 @@ void main(List<String> arguments) async {
 
   var file = CreateJSON('testdata.json', '/Users/evan/testjson');  // Use your appropriate path here
 
+
+    var initialContent = {
+    'name': 'John Doe',
+    'age': 30,
+    'email': 'johndoe@example.com',
+    'isActive': true,
+    'tags': ['developer', 'dart']
+  };
+
+  var formattedjson = file.JSONformat(initialContent);
+  print(formattedjson);
+
  // var arhcive = Djsonarchive();
 
   //arhcive.DJSONarchive(file);

@@ -1,5 +1,6 @@
 /*
 
+
                                _____   _____      _  _____  ____  _   _ 
                               |  __ \ / ____|    | |/ ____|/ __ \| \ | |
                               | |  | | (___      | | (___ | |  | |  \| |
@@ -8,6 +9,7 @@
                               |_____/|_____/ \____/|_____/ \____/|_| \_|
                                            
                                         By Ivan Koskov     
+
 
 ***********************************************************************************************************************
 * 1. In order to start working with the library, you will need to have the Dart SDK installed on your machine.        *
@@ -68,6 +70,7 @@
 *                                                                                                                     *
 * 6. To see all available functions and methods, please refer to the main library file (`JSONOBJECT.dart`) and other library  *
 *    files (e.g., `DJSON.dart`). These files contain all the functions and methods that are available for use.         *
-*                                                                                                                     *
+*    The general pattern among all methods presented in our library is their robustness and ability to return values,  *
+* errors and etc.                                                                                                      *
 ***********************************************************************************************************************
 */
