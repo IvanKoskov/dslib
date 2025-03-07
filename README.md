@@ -1,2 +1,1 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+DSlib (DSJSON) is a simplistic library that provies handy, useful tools for developing apps with JSON in Dart language.
