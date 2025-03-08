@@ -24,7 +24,9 @@ void main(List<String> arguments) async {
 */
 
 var file = CreateJSON('testdata.json', '/Users/evan/testjson', false);  // Use your appropriate path here
+var contents = file.dynamicJSONtoCSV(file); //assign the value of CSV and create it
 
+print(contents);
 
 
   //var file = CreateJSON('testdata.json', '/Users/evan/testjson', false);  // Use your appropriate path here

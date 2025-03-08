@@ -128,8 +128,65 @@ Map<String, dynamic> _mergeJson(Map<String, dynamic> json1, Map<String, dynamic>
 }
 
 
+Future<dynamic> dynamicJSONtoCSV(CreateJSON file) async {
+  try {
+    // Use the `path` package for safer path handling
+    var myFile = File(file.path + Platform.pathSeparator + file.name);
 
+    if (await myFile.exists()) {
+      // Read the file content as a string
+      String contents = await myFile.readAsString();
+      print('Original JSON Content: $contents');
 
+      // Try to decode the JSON content
+      var jsonData = json.decode(contents);
+
+      // If the root of the JSON is a Map, we need to handle it differently
+      if (jsonData is List) {
+        // Convert JSON to CSV format if the root is a List
+        String csvData = _convertJsonToCsv(jsonData);
+
+        // Write the CSV data to a new file
+        var myCSV = File(file.path + Platform.pathSeparator + 'translated.csv');
+        await myCSV.writeAsString(csvData);
+
+        print('CSV file created at: ${myCSV.path}');
+        return csvData;
+      } else {
+        print('Error: Expected JSON to be an array at root.');
+      }
+    } else {
+      print('Error: File does not exist at ${myFile.path}');
+    }
+  } catch (e) {
+    print("Error: $e");
+  }
+  return null; // In case of an error or if file doesn't exist
+}
+
+// Helper function to convert JSON to CSV
+String _convertJsonToCsv(List<dynamic> jsonData) {
+  if (jsonData.isEmpty) {
+    return '';
+  }
+
+  // Assume the first element contains the keys for the CSV headers
+  var headers = jsonData[0].keys.toList();
+
+  // Create CSV content with headers first
+  String csvContent = headers.join(',') + '\n';
+
+  // Iterate through each JSON object to create the rows for CSV
+  for (var item in jsonData) {
+    var row = headers.map((header) {
+      var value = item[header];
+      return value != null ? value.toString().replaceAll(',', '') : ''; // Remove commas from values to avoid issues
+    }).join(',');
+    csvContent += row + '\n';
+  }
+
+  return csvContent;
+}
 
 
 
