@@ -29,3 +29,4 @@
 DSlib (DSJSON) is a simplistic library that provies handy, useful tools for developing apps with JSON in Dart language.
 > [!NOTE]
 > Dslib mainly targets apps that will be done using flutter on MacOS, Linux platforms. 
+Overall dslib also has command line capabilities that can also make it clear not only for UI based apps.
