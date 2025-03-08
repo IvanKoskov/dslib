@@ -8,9 +8,19 @@
 
 ## 1.0.2
 
-- major functionality added
+- Major functionality added
 
 ## 1.0.3
 
-- added merging of JSON files (can be basic) 
-- to do: JSON to CSV
+- Added merging of JSON files (can be basic) 
+- To do: JSON to CSV
+
+## 1.0.4
+
+- Added JSON to CSV
+
+- Encrypting works + decrypting
+
+- More
+
+- More soon
