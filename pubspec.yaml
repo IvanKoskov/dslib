@@ -1,6 +1,6 @@
 name: dslib
 description: dslib (DSJSON) json format manipulation cross-platform dart library made on top of standard dart json manipulation
-version: 1.0.2
+version: 1.0.3
 repository: https://github.com/ivankoskov/dslib
 
 environment:

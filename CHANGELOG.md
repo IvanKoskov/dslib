@@ -9,3 +9,8 @@
 ## 1.0.2
 
 - major functionality added
+
+## 1.0.3
+
+- added merging of JSON files (can be basic) 
+- to do: JSON to CSV
