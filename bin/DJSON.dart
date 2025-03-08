@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 import "JSONOBJECT.dart";
 import 'package:archive/archive.dart';
@@ -94,6 +95,82 @@ encrypt.Key _generateKey(String password) {
 }
 
 
+
+
+
+Map<String, dynamic> _mergeJson(Map<String, dynamic> json1, Map<String, dynamic> json2) {
+  // Create a new map to store the merged result
+  var merged = Map<String, dynamic>.from(json1);
+
+  json2.forEach((key, value) {
+    if (merged.containsKey(key)) {
+      // Check if both the value and the merged value are maps
+      if (value is Map && merged[key] is Map) {
+        // Merge nested maps recursively
+        merged[key] = _mergeJson(
+          merged[key] as Map<String, dynamic>,  // Explicit cast to Map<String, dynamic>
+          value as Map<String, dynamic>         // Explicit cast to Map<String, dynamic>
+        );
+      } else if (value is List && merged[key] is List) {
+        // Concatenate lists
+        merged[key] = List.from(merged[key])..addAll(value);
+      } else {
+        // Overwrite the value if types are not matching or they are primitive
+        merged[key] = value;
+      }
+    } else {
+      // If key doesn't exist in the first JSON, add it
+      merged[key] = value;
+    }
+  });
+
+  return merged;
+}
+
+
+
+
+
+
+
+dynamic JSONobjectMerge(CreateJSON file, CreateJSON file2) {
+  // This method takes the first object as the target file and the second one as the object to merge with.
+  // The output will be saved in the directory of the first (original file).
+
+  // First JSON file
+  var myFile = File(file.path + Platform.pathSeparator + file.name);
+  // Second JSON file
+  var myFile2 = File(file2.path + Platform.pathSeparator + file2.name);
+
+  // Read the contents of the first file
+  String? currentContent1 = myFile.existsSync() ? myFile.readAsStringSync() : null;
+  // Read the contents of the second file
+  String? currentContent2 = myFile2.existsSync() ? myFile2.readAsStringSync() : null;
+
+  // If either file doesn't exist or can't be read, throw an exception
+  if (currentContent1 == null || currentContent2 == null) {
+    throw Exception("Error: One or both files could not be read.");
+  }
+
+  // Decode the JSON strings into Dart objects
+  Map<String, dynamic> json1 = jsonDecode(currentContent1) as Map<String, dynamic>;
+  Map<String, dynamic> json2 = jsonDecode(currentContent2) as Map<String, dynamic>;
+
+  // Merge both JSON objects
+  var mergedJson = _mergeJson(json1, json2);
+
+  // Convert merged map back to JSON string
+  String mergedJsonString = jsonEncode(mergedJson);
+
+  // Try writing the merged JSON to a new file
+  try {
+    var mergedFile = File(file.path + Platform.pathSeparator + 'mergedJSON.json');
+    mergedFile.writeAsStringSync(mergedJsonString);
+    print('Merge was successful and saved at: ${mergedFile.path}');
+  } catch (e) {
+    print('Error creating file: $e');
+  }
+}
 
 
 dynamic JSONformat(var body) {
@@ -217,6 +294,9 @@ String folder = file.path;
 
     return folder;
   }
+
+
+  
 
 }
 

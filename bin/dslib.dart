@@ -1,3 +1,6 @@
+//that is file for testing and debugging stuff
+
+
 import 'package:dslib/dslib.dart' as dslib;
 
 import 'DJSONarchive.dart';
@@ -20,11 +23,22 @@ void main(List<String> arguments) async {
 
 */
 
-  var file = CreateJSON('testdata.json', '/Users/evan/testjson');  // Use your appropriate path here
+var file = CreateJSON('testdata.json', '/Users/evan/testjson', false);  // Use your appropriate path here
 
-var archive = Djsonarchive();
 
-archive.DJSONunarchive(file);
+
+  //var file = CreateJSON('testdata.json', '/Users/evan/testjson', false);  // Use your appropriate path here
+
+ // var file2 = CreateJSON('testdata2.json', '/Users/evan/testjson', false); //second object (JSON file)
+
+ // file.JSONobjectMerge(file, file2); using first object as an entry point and passing another one inside it 
+  
+
+
+
+//var archive = Djsonarchive();
+
+//archive.DJSONunarchive(file);
   
 
  // var formattedjson = file.JSONformat(initialContent);
